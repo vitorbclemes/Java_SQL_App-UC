@@ -25,6 +25,6 @@ Link para repositório no GitHub : https://github.com/vitorbclemes/ProjetoFinal-
 
 API utilizada : Java.sql
 
-Foram implementadas as classes de dados Artigo,Edicao e Tipo ( apenas as necessárias para suprir as condiçoes impostas). Na camada de persistência foi implementado o modelo DAO, entre eles ArtigoDAO,EdicaoDAO e TipoDAO, além do arquivo Conexão. Uma simples camada de exeções foi adicionada para tratar possiveis excecoes lançadas pelo banco. Na camada de sistema foi implementado o design pattern Front Controller. Por fim, a camada de apresentação é responsável pela interação da camada de sistema com o usuário.
+Foram implementadas as classes de dados Artigo,Edicao e Tipo ( apenas as necessárias para suprir as condiçoes impostas). Na camada de persistência foi implementado o Padrão DAO, entre eles ArtigoDAO,EdicaoDAO e TipoDAO, além do arquivo Conexão. Uma simples camada de exeções foi adicionada para tratar possiveis excecoes lançadas pelo banco. Na camada de sistema foi implementado o design pattern Front Controller. Por fim, a camada de apresentação é responsável pela interação da camada de sistema com o usuário.
 
 ----------------------------------------------------------------------------------------------------------------------------------------
