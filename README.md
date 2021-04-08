@@ -12,6 +12,7 @@ Projeto gerado através do Java Extension Pack - Microsoft disponível como exte
 Conectado ao banco de dados de url localhost.
 Banco escolhido : evento_backup implementado em Postgres
 Rodado direto no terminal ( sem GUI )
+Link para repositório no GitHub : https://github.com/vitorbclemes/ProjetoFinal-BAN
 
 ## Informações para Professora
 
