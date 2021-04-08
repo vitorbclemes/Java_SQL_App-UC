@@ -2,16 +2,23 @@
 ## TRABALHO DE BANCO DE DADOS 2021/1
 
 Vitor Bernstorff Clemes
+
 Nicolas Keiji Cattani Sakashita
+
 Universidade Estadual de Santa Catarina
 
 ## Ambiente e especificações
 
 Implementado e testado nos sistemas Windows e Linux Ubuntu;
+
 Projeto gerado através do Java Extension Pack - Microsoft disponível como extensão no Visual Studio Code
+
 Conectado ao banco de dados de url localhost.
+
 Banco escolhido : evento_backup implementado em Postgres
+
 Rodado direto no terminal ( sem GUI )
+
 Link para repositório no GitHub : https://github.com/vitorbclemes/ProjetoFinal-BAN
 
 ## Informações para Professora
