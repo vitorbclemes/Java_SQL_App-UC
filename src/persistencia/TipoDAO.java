@@ -41,7 +41,7 @@ public class TipoDAO {
             }
             return tipo;
         }catch(Exception e){
-            throw new SelectException("Nao foi possivel selecionar");
+            throw new SelectException("Nao foi possivel selecionar o tipo");
         }
     }
 }

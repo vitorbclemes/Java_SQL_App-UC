@@ -62,7 +62,7 @@ public class EdicaoDAO {
                 return 0;
             }
         }catch(SQLException e){
-            throw new InsertException("Nao foi possivel inserir");
+            throw new InsertException("Nao foi possivel inserir a edicao");
         }
     }
 
@@ -74,7 +74,7 @@ public class EdicaoDAO {
             insert.setInt(4, ed.getQtdparticipantes());
             insert.setInt(5, ed.getAno());
         }catch(Exception e){
-            throw new InsertException("Nao foi possivel inserir");
+            throw new InsertException("Nao foi possivel inserir a edicao");
         }
     }
 
@@ -93,7 +93,7 @@ public class EdicaoDAO {
             }
             return edicao;
         }catch(Exception e){
-            throw new SelectException("Nao foi possivel selecionar");
+            throw new SelectException("Nao foi possivel selecionar a edicao");
         }
     }
 
@@ -114,7 +114,7 @@ public class EdicaoDAO {
             }
             return edicoes;
         }catch (Exception e){
-            throw new SelectException("Nao foi possivel selecionar");
+            throw new SelectException("Nao foi possivel selecionar a edicao");
         }
     }
 
@@ -128,7 +128,7 @@ public class EdicaoDAO {
 
             update.executeUpdate();
         }catch (SQLException e){
-            throw new UpdateException("Nao foi possivel atualizar");
+            throw new UpdateException("Nao foi possivel atualizar a edicao");
         }
     }
 

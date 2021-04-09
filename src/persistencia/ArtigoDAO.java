@@ -63,7 +63,7 @@ public class ArtigoDAO {
             }
             return artigos;
         }catch(SQLException e){
-            throw new SelectException("Nao foi possivel selecionar");
+            throw new SelectException("Nao foi possivel selecionar o artigo");
         }
     }
     
@@ -92,20 +92,21 @@ public class ArtigoDAO {
                 return 0;
             }
         }catch (SQLException e){
-            throw new InsertException("Nao foi possivel inserir");
+            throw new InsertException("Nao foi possivel inserir o artigo");
         }
     }
 
     public void insert(Artigo a) throws InsertException{
         try{
             a.setArtigoid(newId());
+            insert.setInt(1, a.getArtigoid());
             insert.setString(2, a.getTitulo());
             insert.setInt(3,a.getTipo().getTipoid());
             insert.setInt(4, a.getEdicao().getEdicaoid());
             insert.executeUpdate();
         
         }catch (Exception e){
-            throw new InsertException("Nao foi possivel inserir");
+            throw new InsertException("Nao foi possivel inserir o artigo");
         }
     }
 
@@ -125,7 +126,7 @@ public class ArtigoDAO {
             }
             return artigo;
         }catch(Exception e){
-            throw new SelectException("Nao foi possivel selecionar");
+            throw new SelectException("Nao foi possivel selecionar o artigo");
         }
     }
 
@@ -147,7 +148,7 @@ public class ArtigoDAO {
             }
             return artigos;
         }catch(SQLException e){
-            throw new SelectException("Nao foi possivel selecionar");
+            throw new SelectException("Nao foi possivel selecionar o artigo");
         }
     }
 
@@ -160,7 +161,7 @@ public class ArtigoDAO {
             
             update.executeUpdate();
         }catch (SQLException e){
-            throw new UpdateException("Nao foi possivel atualiza");
+            throw new UpdateException("Nao foi possivel atualizar o artigo");
         }
     }
 
