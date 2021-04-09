@@ -27,6 +27,7 @@ public class ArtigoDAO {
 	private PreparedStatement select;
 	private PreparedStatement selectAll;
 	private PreparedStatement newId;
+    // Customizado
     private PreparedStatement selectAllArtigosWithEdicoes;
 
     private ArtigoDAO() throws SQLException,ClassNotFoundException{
@@ -101,6 +102,8 @@ public class ArtigoDAO {
             insert.setString(2, a.getTitulo());
             insert.setInt(3,a.getTipo().getTipoid());
             insert.setInt(4, a.getEdicao().getEdicaoid());
+            insert.executeUpdate();
+        
         }catch (Exception e){
             throw new InsertException("Nao foi possivel inserir");
         }
@@ -118,7 +121,7 @@ public class ArtigoDAO {
                 int tipoid = rs.getInt("tipoid");
                 artigo.setTipo(tipoDAO.select(tipoid));
                 int edicaoid = rs.getInt("edicaoid");
-                artigo.setEdicao(edicaoDAO.select(edicaoid));;
+                artigo.setEdicao(edicaoDAO.select(edicaoid));
             }
             return artigo;
         }catch(Exception e){

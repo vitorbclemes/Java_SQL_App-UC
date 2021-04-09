@@ -34,7 +34,10 @@ public class Main {
                 manipulateEdicoesMenu();
                 banOp = s.nextInt();
                 handleEdicoes(banOp);
-            }else{
+            }else if (menuOp == 3){
+                System.out.println("Desconectando...");
+            }
+            else{
                 System.out.println("Entrada invalida");
             }
         }
@@ -100,7 +103,7 @@ public class Main {
         else if(operation == 4){
             try{
                 controller.selectAllArtigoWithEdicoes().forEach(artigo->{
-                    System.out.println(artigo.toString());
+                    System.out.println(artigo.composedToString());
                 });
             }catch(Exception e){
                 e.printStackTrace();

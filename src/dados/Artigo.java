@@ -33,8 +33,12 @@ public class Artigo {
     
     @Override
     public String toString() {
-        return "Artigo [id=" + artigoid + ", edicaoId=" + edicao.getEdicaoid() + ", tipoId=" + tipo + ", titulo=" + titulo + "]";
+        String tipoid = (tipo == null) ? "null" : Integer.toString(tipo.getTipoid());
+        String edicaoid = (edicao == null) ? "null" : Integer.toString(edicao.getEdicaoid());
+        return "Artigo [id=" + artigoid + ", edicaoId=" + edicaoid + ", tipoId=" + tipoid + ", titulo=" + titulo + "]";
     }
 
-
+    public String composedToString(){
+        return "Artigo [id =" + artigoid + ", titulo="+titulo + "  //  Edicao [cidade=" + edicao.getCidade() + ", ano=" + edicao.getAno();
+    }
 }

@@ -17,7 +17,7 @@ public class Conexao {
 			
 			try {
 				Class.forName("org.postgresql.Driver");
-				conexao = DriverManager.getConnection(url,username,"postgres" );
+				conexao = DriverManager.getConnection(url,username,"vitordk" );
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
@@ -28,6 +28,4 @@ public class Conexao {
 		}
 		return conexao;
 	}
-
-
 }
