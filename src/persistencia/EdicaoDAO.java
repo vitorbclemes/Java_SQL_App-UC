@@ -25,6 +25,7 @@ public class EdicaoDAO {
 	private PreparedStatement select;
 	private PreparedStatement selectAll;
 	private PreparedStatement newId;
+    private PreparedStatement selectAllWhereUFisRS;
 
     private EdicaoDAO() throws SQLException,ClassNotFoundException{
         Connection conexao = Conexao.getConexao();
@@ -35,6 +36,31 @@ public class EdicaoDAO {
 		select = conexao.prepareStatement("select *	from edicoes where edicaoid = ?");
 		selectAll = conexao.prepareStatement("select * from edicoes");
 		newId = conexao.prepareStatement("select nextval('edicoes_id_seq')"); 
+
+        //Permitir uma consulta com subconsulta (OK)
+        //Retorna as edicoes que ocorreram no estado de RS
+        selectAllWhereUFisRS = conexao.prepareStatement("select  * from edicoes where cidade in (select e1.cidade from edicoes e1 where e1.uf = 'RS')");
+    }
+
+    public List<Edicao> selectAllWhereUFisRS() throws SelectException{
+        List<Edicao> edicoes = new ArrayList<Edicao>();
+        Edicao edicao = null;
+        try{
+            ResultSet rs = selectAllWhereUFisRS.executeQuery();
+            while ( rs.next() ){
+                edicao = new Edicao();
+                edicao.setEdicaoid(rs.getInt("edicaoid"));
+                edicao.setCidade(rs.getString("cidade"));
+                edicao.setUf(rs.getString("uf"));
+                edicao.setQtdparticipantes(rs.getInt("qtdparticipantes"));
+                edicao.setAno(rs.getInt("ano"));
+
+                edicoes.add(edicao);
+            }
+            return edicoes;
+        }catch (Exception e){
+            throw new SelectException("Nao foi possivel selecionar a edicao");
+        }
     }
 
     public static EdicaoDAO getInstance() throws SQLException,ClassNotFoundException{

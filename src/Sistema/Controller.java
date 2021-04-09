@@ -2,6 +2,7 @@ package Sistema;
 
 //JAVA.UTIL Imports
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 //SQL Imports
@@ -105,8 +106,17 @@ public class Controller {
         return edicaoDAO.selectAll();
     }
 
-    //Customizado
-    public List<Artigo> selectAllArtigoWithEdicoes() throws SelectException{
-        return artigoDAO.selectAllArtigosWithEdicoes();
+    //Customizado  -- Tive que transformar em uma String apenas para o print
+    public String selectAllArtigoWithEdicoes() throws SelectException{
+        Map<Artigo,Edicao> valores =  artigoDAO.selectAllArtigosWithEdicoes();
+        String res = "";
+        for (Map.Entry<Artigo,Edicao> pair : valores.entrySet()) {
+            res += "Artigo [id ="+pair.getKey().getArtigoid() + ", titulo=" + pair.getKey().getTitulo() + "] - Edicao [edicao =" +pair.getValue().getEdicaoid() + ",ano= " + pair.getValue().getAno() + "]\n";
+        }
+        return res;
+    }
+
+    public List<Edicao> selectAllWhereUFisRS() throws SelectException{
+        return edicaoDAO.selectAllWhereUFisRS();
     }
 }

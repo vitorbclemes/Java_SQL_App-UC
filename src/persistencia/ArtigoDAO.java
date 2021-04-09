@@ -9,9 +9,12 @@ import java.sql.SQLException;
 //JAVA.UTIL imports
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 //DATA Imports
 import dados.Artigo;
+import dados.Edicao;
 
 //EXCEPTIONS Imports
 import exceptions.*;
@@ -43,25 +46,28 @@ public class ArtigoDAO {
 		selectAll = conexao.prepareStatement("select * from artigos");
 		newId = conexao.prepareStatement("select nextval('artigos_id_seq')");
 
-        //Retorna a.artigoid,a.titulo,e.cidade,e.ano
-        selectAllArtigosWithEdicoes = conexao.prepareStatement("select a.artigoid,a.titulo,e.cidade,e.ano from artigos JOIN edicoes e ON a.edicaoid = e.edicaoid");
+        // Permitir uma consulta com juncao de Tabelas (OK)
+        //Retorna a.artigoid,a.titulo,e.edicaoid,e.ano das edicoes onde cidade = Caxias do Sul
+        selectAllArtigosWithEdicoes = conexao.prepareStatement("select a.artigoid,a.titulo,e.edicaoid,e.ano from artigos a JOIN edicoes e ON a.edicaoid = e.edicaoid and e.cidade = 'Caxias do Sul'");
     }
 
-    public List<Artigo> selectAllArtigosWithEdicoes() throws SelectException{
-        List<Artigo> artigos = new ArrayList<Artigo>();
+    public Map<Artigo,Edicao> selectAllArtigosWithEdicoes() throws SelectException{
+        Map<Artigo,Edicao> objects  = new HashMap<Artigo,Edicao>();
         Artigo artigo = null;
+        Edicao edicao = null;
         try{
             ResultSet rs = selectAllArtigosWithEdicoes.executeQuery();
             while ( rs.next() ){
                 artigo = new Artigo();
+                edicao = new Edicao();
                 artigo.setArtigoid(rs.getInt("artigoid"));
                 artigo.setTitulo(rs.getString("titulo"));
-                int tipoid = rs.getInt("tipoid");
-                artigo.setTipo(tipoDAO.select(tipoid));
-                int edicaoid = rs.getInt("edicaoid");
-                artigo.setEdicao(edicaoDAO.select(edicaoid));
+                edicao.setEdicaoid(rs.getInt("edicaoid"));
+                edicao.setAno(rs.getInt("ano"));
+
+                objects.put(artigo, edicao);
             }
-            return artigos;
+            return objects;
         }catch(SQLException e){
             throw new SelectException("Nao foi possivel selecionar o artigo");
         }

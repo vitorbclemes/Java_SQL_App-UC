@@ -55,8 +55,7 @@ public class Main {
         System.out.println("1 - Inserir novo Artigo.");
         System.out.println("2 - Selecionar Artigo pelo id");
         System.out.println("3 - Selecionar todos os Artigos");
-        System.out.println("4 - Selecionar id e titulo de Artigos e Ano e Cidade de sua respectiva edicao");
-        System.out.println("\n-- Extras --");
+        System.out.println("4 - Selecionar id e titulo de Artigos e id e Ano de sua respectiva edicao");
         System.out.println("5 - Remover Artigo pelo id");
         System.out.println("6 - Atualizar Artigo pelo id");
     }
@@ -66,9 +65,9 @@ public class Main {
         System.out.println("1 - Inserir nova Edicao");
         System.out.println("2 - Selecionar Edicao pelo id");
         System.out.println("3 - Selecionar todas as Edicoes");
-        System.out.println("\n-- Extras --");
-        System.out.println("4 - Remover Edicao pelo id");
-        System.out.println("5 - Atualizar Edicao pelo id");
+        System.out.println("4 - Selecionar as edicoes que ocorreram no estado do RS");
+        System.out.println("5 - Remover Edicao pelo id");
+        System.out.println("6 - Atualizar Edicao pelo id");
     }
     
     private static void handleArtigos(int operation){
@@ -102,9 +101,7 @@ public class Main {
 
         else if(operation == 4){
             try{
-                controller.selectAllArtigoWithEdicoes().forEach(artigo->{
-                    System.out.println(artigo.composedToString());
-                });
+                System.out.println(controller.selectAllArtigoWithEdicoes());
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -143,7 +140,7 @@ public class Main {
         }
 
         else if(operation == 2){
-            System.out.println("Id do artigo:");
+            System.out.println("Id da Edicao:");
             try{
                 System.out.println(controller.selectEdicao(s.nextInt()).toString()); 
             }catch(Exception e){
@@ -160,8 +157,17 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        else if(operation == 4){
+            try{
+                controller.selectAllWhereUFisRS().forEach(edicao->{
+                    System.out.println(edicao.toString());
+                });
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
 
-        else if (operation == 4){
+        else if (operation == 5){
             System.out.println("Id da Edicao:");
             try{
                 controller.deletarEdicao(controller.selectEdicao(s.nextInt())); 
@@ -170,7 +176,7 @@ public class Main {
             }
         }
         
-        else if ( operation == 5){
+        else if ( operation == 6){
             System.out.println("Id da Edicao:");
             try{
                 controller.atualizarEdicao(s.nextInt()); 
