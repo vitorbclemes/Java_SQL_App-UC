@@ -102,7 +102,7 @@ public class ArtigoDAO {
             insert.setString(2, a.getTitulo());
             insert.setInt(3,a.getTipo().getTipoid());
             insert.setInt(4, a.getEdicao().getEdicaoid());
-            insert.executeUpdate();
+            insert.executeQuery();
         
         }catch (Exception e){
             throw new InsertException("Nao foi possivel inserir");
