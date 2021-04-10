@@ -31,8 +31,8 @@ public class EdicaoDAO {
         Connection conexao = Conexao.getConexao();
 
         insert = conexao.prepareStatement("insert into edicoes values (?,?,?,?,?)");
-		delete = conexao.prepareStatement("delete from edicoes where edicoesid = ?");
-		update = conexao.prepareStatement("update edicioes set cidade = ?,uf = ?,qtdparticipantes = ?, ano = ? where edicaoid = ?");
+		delete = conexao.prepareStatement("delete from edicoes where edicaoid = ?");
+		update = conexao.prepareStatement("update edicoes set cidade = ?,uf = ?,qtdparticipantes = ?, ano = ? where edicaoid = ?");
 		select = conexao.prepareStatement("select *	from edicoes where edicaoid = ?");
 		selectAll = conexao.prepareStatement("select * from edicoes");
 		newId = conexao.prepareStatement("select nextval('edicoes_id_seq')"); 
@@ -95,6 +95,7 @@ public class EdicaoDAO {
     public void insert(Edicao ed) throws InsertException{
         try{
             ed.setEdicaoid(newId());
+            insert.setInt(1, ed.getEdicaoid());
             insert.setString(2, ed.getCidade());
             insert.setString(3, ed.getUf());
             insert.setInt(4, ed.getQtdparticipantes());
@@ -147,7 +148,6 @@ public class EdicaoDAO {
 
     public void update (Edicao ed) throws UpdateException{
         try{
-            
             update.setString(1, ed.getCidade());
             update.setString(2, ed.getUf());
             update.setInt(3, ed.getQtdparticipantes());

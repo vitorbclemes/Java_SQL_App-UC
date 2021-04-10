@@ -184,7 +184,6 @@ public class Main {
             try{
                 //Gambiarra pra tratar possiveis problemas de buffer
                 int i = s.nextInt();
-                s.nextLine();
                 controller.atualizarEdicao(i); 
             }catch(Exception e){
                 e.printStackTrace();
