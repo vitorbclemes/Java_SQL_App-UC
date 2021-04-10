@@ -44,7 +44,7 @@ public class Main {
     }
 
     private static void menu() {
-        System.out.println(" -- Sistema -- ");
+        System.out.println("\n -- Sistema -- ");
         System.out.println("1 - Manipular artigos");
         System.out.println("2 - Manipular edicoes");
         System.out.println("3 - Sair");     
