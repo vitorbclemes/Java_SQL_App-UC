@@ -99,6 +99,7 @@ public class EdicaoDAO {
             insert.setString(3, ed.getUf());
             insert.setInt(4, ed.getQtdparticipantes());
             insert.setInt(5, ed.getAno());
+            insert.executeUpdate();
         }catch(Exception e){
             throw new InsertException("Nao foi possivel inserir a edicao");
         }
@@ -146,12 +147,12 @@ public class EdicaoDAO {
 
     public void update (Edicao ed) throws UpdateException{
         try{
-            update.setInt(1, ed.getEdicaoid());
-            update.setString(2, ed.getCidade());
-            update.setString(3, ed.getUf());
-            update.setInt(4, ed.getQtdparticipantes());
-            update.setInt(5, ed.getAno());
-
+            
+            update.setString(1, ed.getCidade());
+            update.setString(2, ed.getUf());
+            update.setInt(3, ed.getQtdparticipantes());
+            update.setInt(4, ed.getAno());
+            update.setInt(5, ed.getEdicaoid());
             update.executeUpdate();
         }catch (SQLException e){
             throw new UpdateException("Nao foi possivel atualizar a edicao");

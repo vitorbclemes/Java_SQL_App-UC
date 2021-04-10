@@ -119,7 +119,10 @@ public class Main {
         else if ( operation == 6){
             System.out.println("Id do artigo:");
             try{
-                controller.atualizarArtigo(s.nextInt()); 
+                //Gambiarra pra tratar possiveis problemas de buffer
+                int i = s.nextInt();
+                s.nextLine();
+                controller.atualizarArtigo(i); 
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -133,7 +136,7 @@ public class Main {
     private static void handleEdicoes(int operation){
         if(operation == 1){
             try{
-                controller.novaEdicao();;
+                controller.inserirEdicao(controller.novaEdicao());
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -179,7 +182,10 @@ public class Main {
         else if ( operation == 6){
             System.out.println("Id da Edicao:");
             try{
-                controller.atualizarEdicao(s.nextInt()); 
+                //Gambiarra pra tratar possiveis problemas de buffer
+                int i = s.nextInt();
+                s.nextLine();
+                controller.atualizarEdicao(i); 
             }catch(Exception e){
                 e.printStackTrace();
             }

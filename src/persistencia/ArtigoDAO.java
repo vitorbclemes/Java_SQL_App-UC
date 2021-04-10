@@ -160,10 +160,12 @@ public class ArtigoDAO {
 
     public void update(Artigo artigo) throws UpdateException{
         try{
-            update.setInt(1, artigo.getArtigoid());
-            update.setString(2, artigo.getTitulo());
-            update.setInt(3, artigo.getTipo().getTipoid());
-            update.setInt(4, artigo.getEdicao().getEdicaoid());
+            // System.out.println(artigo.getArtigoid());
+           
+            update.setString(1, artigo.getTitulo());
+            update.setInt(2, artigo.getTipo().getTipoid());
+            update.setInt(3, artigo.getEdicao().getEdicaoid());
+            update.setInt(4, artigo.getArtigoid());
             
             update.executeUpdate();
         }catch (SQLException e){

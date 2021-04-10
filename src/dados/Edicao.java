@@ -40,7 +40,7 @@ public class Edicao {
     
     @Override
     public String toString() {
-        return "Edicao [id = " + edicaoid +"ano=" + ano + ", cidade=" + cidade +  ", qtdparticipantes="
+        return "Edicao [id = " + edicaoid +", ano=" + ano + ", cidade=" + cidade +  ", qtdparticipantes="
                 + qtdparticipantes + ", uf=" + uf + "]";
     }
 
