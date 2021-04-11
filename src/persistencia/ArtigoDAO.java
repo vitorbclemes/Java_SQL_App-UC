@@ -46,39 +46,28 @@ public class ArtigoDAO {
 		selectAll = conexao.prepareStatement("select * from artigos");
 		newId = conexao.prepareStatement("select nextval('artigos_id_seq')");
 
-        // Permitir uma consulta com juncao de Tabelas (OK)
-        //Retorna a.artigoid,a.titulo,e.edicaoid,e.ano das edicoes onde cidade = Caxias do Sul
+        //Permitir uma consulta com juncao de Tabelas (OK)
         selectAllArtigosWithEdicoes = conexao.prepareStatement("select a.artigoid,a.titulo,e.edicaoid,e.ano from artigos a JOIN edicoes e ON a.edicaoid = e.edicaoid and e.cidade = 'Caxias do Sul'");
     }
-
-    public Map<Artigo,Edicao> selectAllArtigosWithEdicoes() throws SelectException{
-        Map<Artigo,Edicao> objects  = new HashMap<Artigo,Edicao>();
-        Artigo artigo = null;
-        Edicao edicao = null;
-        try{
-            ResultSet rs = selectAllArtigosWithEdicoes.executeQuery();
-            while ( rs.next() ){
-                artigo = new Artigo();
-                edicao = new Edicao();
-                artigo.setArtigoid(rs.getInt("artigoid"));
-                artigo.setTitulo(rs.getString("titulo"));
-                edicao.setEdicaoid(rs.getInt("edicaoid"));
-                edicao.setAno(rs.getInt("ano"));
-
-                objects.put(artigo, edicao);
-            }
-            return objects;
-        }catch(SQLException e){
-            throw new SelectException("Nao foi possivel selecionar o artigo");
-        }
-    }
     
+    /** 
+     * Inicia a instancia DAO caso ela nao exista
+     * @return ArtigoDAO
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static ArtigoDAO getInstance() throws SQLException,ClassNotFoundException{
         if(instance == null)
             instance = new ArtigoDAO();
         return instance;
     }
 
+    
+    /** 
+     * Deleta um artigo do DB
+     * @param a
+     * @throws DeleteException
+     */
     public void delete(Artigo a) throws DeleteException{
         try{
             delete.setInt(1,a.getArtigoid());
@@ -88,6 +77,12 @@ public class ArtigoDAO {
         }
     }
 
+    
+    /** 
+     * Gera um novo ID disponivel
+     * @return int
+     * @throws InsertException
+     */
     public int newId() throws InsertException{
         try{
             ResultSet rs = newId.executeQuery();
@@ -102,6 +97,12 @@ public class ArtigoDAO {
         }
     }
 
+    
+    /** 
+     * Insere um artigo no DB
+     * @param a
+     * @throws InsertException
+     */
     public void insert(Artigo a) throws InsertException{
         try{
             a.setArtigoid(newId());
@@ -116,6 +117,13 @@ public class ArtigoDAO {
         }
     }
 
+    
+    /** 
+     * Seleciona um artigo do DB
+     * @param artigoid
+     * @return Artigo
+     * @throws SelectException
+     */
     public Artigo select(int artigoid) throws SelectException{
         Artigo artigo = null;
         try{
@@ -136,6 +144,12 @@ public class ArtigoDAO {
         }
     }
 
+    
+    /** 
+     * Seleciona todos os artigos do DB
+     * @return List<Artigo>
+     * @throws SelectException
+     */
     public List<Artigo> selectAll() throws SelectException{
         List<Artigo> artigos = new ArrayList<Artigo>();
         Artigo artigo = null;
@@ -158,6 +172,12 @@ public class ArtigoDAO {
         }
     }
 
+    
+    /** 
+     * Atualiza um artigo do DB
+     * @param artigo
+     * @throws UpdateException
+     */
     public void update(Artigo artigo) throws UpdateException{
         try{
             // System.out.println(artigo.getArtigoid());
@@ -172,6 +192,34 @@ public class ArtigoDAO {
             throw new UpdateException("Nao foi possivel atualizar o artigo");
         }
     }
+
+    /** 
+     * Seleciona todos os ids e titulos de Artigos e ids e anos das edicoes que ocorreram em Caxias do Sul do DB
+     * @return Map<Artigo, Edicao>
+     * @throws SelectException
+     */
+    public Map<Artigo,Edicao> selectAllArtigosWithEdicoes() throws SelectException{
+        Map<Artigo,Edicao> objects  = new HashMap<Artigo,Edicao>();
+        Artigo artigo = null;
+        Edicao edicao = null;
+        try{
+            ResultSet rs = selectAllArtigosWithEdicoes.executeQuery();
+            while ( rs.next() ){
+                artigo = new Artigo();
+                edicao = new Edicao();
+                artigo.setArtigoid(rs.getInt("artigoid"));
+                artigo.setTitulo(rs.getString("titulo"));
+                edicao.setEdicaoid(rs.getInt("edicaoid"));
+                edicao.setAno(rs.getInt("ano"));
+
+                objects.put(artigo, edicao);
+            }
+            return objects;
+        }catch(SQLException e){
+            throw new SelectException("Nao foi possivel selecionar o artigo");
+        }
+    }
+    
 
 
     

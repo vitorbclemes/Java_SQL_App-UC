@@ -42,33 +42,25 @@ public class EdicaoDAO {
         selectAllWhereUFisRS = conexao.prepareStatement("select  * from edicoes where cidade in (select e1.cidade from edicoes e1 where e1.uf = 'RS')");
     }
 
-    public List<Edicao> selectAllWhereUFisRS() throws SelectException{
-        List<Edicao> edicoes = new ArrayList<Edicao>();
-        Edicao edicao = null;
-        try{
-            ResultSet rs = selectAllWhereUFisRS.executeQuery();
-            while ( rs.next() ){
-                edicao = new Edicao();
-                edicao.setEdicaoid(rs.getInt("edicaoid"));
-                edicao.setCidade(rs.getString("cidade"));
-                edicao.setUf(rs.getString("uf"));
-                edicao.setQtdparticipantes(rs.getInt("qtdparticipantes"));
-                edicao.setAno(rs.getInt("ano"));
-
-                edicoes.add(edicao);
-            }
-            return edicoes;
-        }catch (Exception e){
-            throw new SelectException("Nao foi possivel selecionar a edicao");
-        }
-    }
-
+    
+    /** 
+     * Inicia a instancia DAO caso ela nao exista
+     * @return EdicaoDAO
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static EdicaoDAO getInstance() throws SQLException,ClassNotFoundException{
         if(instance == null)
             instance = new EdicaoDAO();
         return instance;
     }
 
+    
+    /** 
+     * Deleta uma edicao do DB
+     * @param ed
+     * @throws DeleteException
+     */
     public void delete(Edicao ed) throws DeleteException{
         try{
             delete.setInt(1,ed.getEdicaoid());
@@ -78,6 +70,12 @@ public class EdicaoDAO {
         }
     }
 
+    
+    /** 
+     * Gera um novo ID disponivel
+     * @return int
+     * @throws InsertException
+     */
     public int newId() throws InsertException{
         try{
             ResultSet rs = newId.executeQuery();
@@ -92,6 +90,12 @@ public class EdicaoDAO {
         }
     }
 
+    
+    /** 
+     * Insere uma edicao no DB
+     * @param ed
+     * @throws InsertException
+     */
     public void insert(Edicao ed) throws InsertException{
         try{
             ed.setEdicaoid(newId());
@@ -106,6 +110,13 @@ public class EdicaoDAO {
         }
     }
 
+    
+    /** 
+     * Seleciona um edicao do DB
+     * @param edicaoid
+     * @return Edicao
+     * @throws SelectException
+     */
     public Edicao select(int edicaoid) throws SelectException{
         Edicao edicao = null;
         try{
@@ -125,6 +136,12 @@ public class EdicaoDAO {
         }
     }
 
+    
+    /** 
+     * Seleciona todas as edicoes do DB
+     * @return List<Edicao>
+     * @throws SelectException
+     */
     public List<Edicao> selectAll() throws SelectException{
         List<Edicao> edicoes = new ArrayList<Edicao>();
         Edicao edicao = null;
@@ -146,6 +163,12 @@ public class EdicaoDAO {
         }
     }
 
+    
+    /** 
+     * Atualiza uma edicao do DB
+     * @param ed
+     * @throws UpdateException
+     */
     public void update (Edicao ed) throws UpdateException{
         try{
             update.setString(1, ed.getCidade());
@@ -156,6 +179,33 @@ public class EdicaoDAO {
             update.executeUpdate();
         }catch (SQLException e){
             throw new UpdateException("Nao foi possivel atualizar a edicao");
+        }
+    }
+
+    
+    /** 
+     * Seleciona todas as edicoes que ocorreram no estado do Rio Grande do Sul
+     * @return List<Edicao>
+     * @throws SelectException
+     */
+    public List<Edicao> selectAllWhereUFisRS() throws SelectException{
+        List<Edicao> edicoes = new ArrayList<Edicao>();
+        Edicao edicao = null;
+        try{
+            ResultSet rs = selectAllWhereUFisRS.executeQuery();
+            while ( rs.next() ){
+                edicao = new Edicao();
+                edicao.setEdicaoid(rs.getInt("edicaoid"));
+                edicao.setCidade(rs.getString("cidade"));
+                edicao.setUf(rs.getString("uf"));
+                edicao.setQtdparticipantes(rs.getInt("qtdparticipantes"));
+                edicao.setAno(rs.getInt("ano"));
+
+                edicoes.add(edicao);
+            }
+            return edicoes;
+        }catch (Exception e){
+            throw new SelectException("Nao foi possivel selecionar a edicao");
         }
     }
 

@@ -14,7 +14,7 @@ import exceptions.SelectException;
 public class TipoDAO {
     public static TipoDAO instance = null;
     
-    //Apenas o necessario
+    //Apenas o necessario para manipular os artigos
     private PreparedStatement select;
 
     private TipoDAO() throws SQLException,ClassNotFoundException{
@@ -23,12 +23,26 @@ public class TipoDAO {
         select = conexao.prepareStatement("select *	from tipos where tipoid = ?");
     }
 
+    
+    /** 
+     * Inicia a instancia DAO caso ela nao exista
+     * @return TipoDAO
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static TipoDAO getInstance() throws SQLException,ClassNotFoundException{
         if(instance == null)
             instance = new TipoDAO();
         return instance;
     }
 
+    
+    /** 
+     * Seleciona um tipo do DB
+     * @param tipoid
+     * @return Tipo
+     * @throws SelectException
+     */
     public Tipo select(int tipoid) throws SelectException{
         Tipo tipo = null;
         try{

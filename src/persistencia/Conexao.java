@@ -10,6 +10,13 @@ public class Conexao {
 		
 	}
 	
+	
+	/** 
+	 * Realiza a conexao com o banco de dados Postgres
+	 * @return Connection
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public static Connection getConexao() throws SQLException,ClassNotFoundException {
 		if(conexao == null) {
 			String url = "jdbc:postgresql://localhost:5432/evento";

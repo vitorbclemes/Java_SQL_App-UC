@@ -10,6 +10,11 @@ public class Main {
     private static Controller controller = null;
     private static Scanner s = new Scanner(System.in);
     
+    
+    /** 
+     * Exibe a interacao gráfica com o usuário
+     * @param args
+     */
     public static void main(String[] args){
         
         try{
@@ -42,7 +47,11 @@ public class Main {
             }
         }
     }
-
+    
+    
+    /**
+     * Exibe as opcoes do menu 
+     */
     private static void menu() {
         System.out.println("\n -- Sistema -- ");
         System.out.println("1 - Manipular artigos");
@@ -50,6 +59,10 @@ public class Main {
         System.out.println("3 - Sair");     
     }
 
+
+    /**
+     * Exibe as opcoes para Artigos
+     */
     private static void manipulateArtigosMenu(){
         System.out.println("-- Opcoes para Artigo --");
         System.out.println("1 - Inserir novo Artigo.");
@@ -60,6 +73,10 @@ public class Main {
         System.out.println("6 - Atualizar Artigo pelo id");
     }
 
+
+    /**
+     * Exibe as opcoes para Edicoes
+     */
     private static void manipulateEdicoesMenu(){
         System.out.println("-- Opcoes para Edicao --");
         System.out.println("1 - Inserir nova Edicao");
@@ -70,6 +87,11 @@ public class Main {
         System.out.println("6 - Atualizar Edicao pelo id");
     }
     
+    
+    /** 
+     * Gerencia as operaçoes envolvendo Artigos
+     * @param operation
+     */
     private static void handleArtigos(int operation){
         
         if(operation == 1){
@@ -133,6 +155,11 @@ public class Main {
         }
     }
     
+    
+    /** 
+     * Gerencia as operacoes envolvendo Edicoes
+     * @param operation
+     */
     private static void handleEdicoes(int operation){
         if(operation == 1){
             try{
